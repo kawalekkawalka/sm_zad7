@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">librarywithapi</string>
+    <string name="img_cover">Book cover</string>
+    <string name="search">Search</string>
+    <string name="clear_search">Clear search</string>
+    <string name="year_of_publishing">Year of publishing:</string>
+    <string name="title">Title:</string>
+    <string name="author">Author:</string>
+    <string name="language">Language:</string>
+</resources>
