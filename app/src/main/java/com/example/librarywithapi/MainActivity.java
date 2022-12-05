@@ -1,10 +1,13 @@
 package com.example.librarywithapi;
 
+import static com.example.librarywithapi.DetailsActivity.EXTRA_BOOK_OBJ;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -85,12 +88,20 @@ public class MainActivity extends AppCompatActivity {
             bookCover = itemView.findViewById(R.id.img_cover);
         }
 
-        public void bind(Book book){
-            if (book != null && checkNullOrEmpty(book.getTitle()) && book.getAuthors() != null){
+        public void bind(Book book) {
+            if (book != null && checkNullOrEmpty(book.getTitle()) && book.getAuthors() != null) {
                 bookTitleTextView.setText(book.getTitle());
                 bookAuthorTextView.setText(TextUtils.join(", ", book.getAuthors()));
                 numberOfPagesTextView.setText(book.getNumberOfPages());
-                if(book.getCover() != null){
+
+                View itemContainer = itemView.findViewById(R.id.book_item_container);
+                itemContainer.setOnClickListener(v -> {
+                    Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+                    intent.putExtra(EXTRA_BOOK_OBJ, book);
+                    startActivity(intent);
+                });
+
+                if (book.getCover() != null) {
                     Picasso.with(itemView.getContext())
                             .load(IMAGE_URL_BASE + book.getCover() + "-S.jpg")
                             .placeholder(R.drawable.ic_baseline_book_24).into(bookCover);
@@ -138,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<BookContainer> call, Throwable t) {
+            public void onFailure(retrofit2.Call<BookContainer> call, Throwable t) {
                 Snackbar.make(findViewById(R.id.main_view), "Something went wrong. Please try later!", BaseTransientBottomBar.LENGTH_LONG).show();
             }
         });

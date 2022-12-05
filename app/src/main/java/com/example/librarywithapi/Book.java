@@ -2,9 +2,10 @@ package com.example.librarywithapi;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Book {
+public class Book implements Serializable {
     @SerializedName("title")
     private String title;
     @SerializedName("author_name")
@@ -13,10 +14,10 @@ public class Book {
     private String cover;
     @SerializedName("number_of_pages_median")
     private String numberOfPages;
-    @SerializedName("publish_year")
+    @SerializedName("first_publish_year")
     private int yearOfPublishing;
     @SerializedName("language")
-    private String language;
+    private List<String> languages;
 
 
     public String getTitle() {
@@ -59,11 +60,7 @@ public class Book {
         this.yearOfPublishing = yearOfPublishing;
     }
 
-    public String getLanguage(){
-        return language;
-    }
-
-    public void setLanguage(String language){
-        this.language = language;
+    public List<String> getLanguages() {
+        return languages;
     }
 }

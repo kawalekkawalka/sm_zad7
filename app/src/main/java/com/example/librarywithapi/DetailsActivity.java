@@ -36,7 +36,7 @@ public class DetailsActivity extends AppCompatActivity {
         bookTitleTextView.setText(getString(R.string.title) + book.getTitle());
         bookAuthorTextView.setText(getString(R.string.author) + TextUtils.join(", ", book.getAuthors()));
         bookYearOfPublishingTextView.setText(getString(R.string.year_of_publishing) + String.valueOf(book.getYearOfPublishing()));
-        bookLanguageTextView.setText(getString(R.string.language) + book.getLanguage());
+        bookLanguageTextView.setText(getString(R.string.language) + TextUtils.join(", ", book.getLanguages()));
 
         if (book.getCover() != null) {
             Picasso.with(getApplicationContext())
